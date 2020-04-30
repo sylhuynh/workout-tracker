@@ -7,9 +7,7 @@ const db = require("../models");
 
 // Creates a workout using data in the request body.
 router.post("/api/workouts", (req, res) => {
-  const { body } = req;
-
-  db.Workout.create(body)
+  db.Workout.create(req.body)
     .then(dbWorkout => {
       res.json(dbWorkout);
     })
@@ -26,7 +24,13 @@ router.put("/api/workouts/:id", (req, res) => {
 
 // Respond with json for all the workouts in an array.
 router.get("/api/workouts", (req, res) => {
-  // CODE HERE
+  db.Workout.find({})
+    .then((dbWorkout) => {
+      res.json(dbWorkout);
+    })
+    .catch((err) => {
+      res.json(err);
+    });  
 });
 
 // Respond with json array containing the last 7 workouts
