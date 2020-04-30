@@ -54,7 +54,18 @@ router.get("/api/workouts/range", (req, res) => {
 
 // Delete workout with id matching id in the request body.
 router.delete("/api/workouts", (req, res) => {
-  // CODE HERE
+  db.Workout.remove(
+    {
+      _id: req.params.id,
+    },
+    (error, data) => {
+      if (error) {
+        res.send(error);
+      } else {
+        res.send(data);
+      }
+    }
+  );
 });
 
 module.exports = router;
