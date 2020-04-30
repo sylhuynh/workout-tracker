@@ -1,12 +1,21 @@
 const router = require("express").Router();
 
 // TODO: import required model/s
+const db = require("../models");
 
 // TODO: and add code to the routes so that the app functions correctly
 
 // Creates a workout using data in the request body.
 router.post("/api/workouts", (req, res) => {
-  // CODE HERE
+  const { body } = req;
+
+  db.Workout.create(body)
+    .then(dbWorkout => {
+      res.json(dbWorkout);
+    })
+    .catch(err => {
+      res.json(err);
+    });
 });
 
 // Respond with workout for id url parameter. This should
