@@ -49,7 +49,13 @@ router.get("/api/workouts", (req, res) => {
 
 // Respond with json array containing the last 7 workouts
 router.get("/api/workouts/range", (req, res) => {
-  // CODE HERE
+  db.Workout.find({}).limit(7)
+  .then(dbWorkout => {
+    res.json(dbWorkout);
+  })
+  .catch(err => {
+    res.json(err);
+  });
 });
 
 // Delete workout with id matching id in the request body.
