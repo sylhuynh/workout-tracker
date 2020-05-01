@@ -24,6 +24,7 @@ router.put("/api/workouts/:id", (req, res) => {
       _id: req.params.id,
     },
     {
+      $inc : {totalDuration : req.body.duration},
       $push: { exercises: req.body },
     },
     (error, data) => {
